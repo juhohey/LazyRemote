@@ -1,0 +1,13 @@
+.root{
+	font-family: sans-serif;
+	font-size: 16px;
+/*	-fx-background-color:#eee;*/
+}
+
+#main{
+/*	-fx-background-color: azure;*/
+	-fx-spacing:40;
+}
+#top{
+	/*-fx-background-color: #eee;*/
+}
