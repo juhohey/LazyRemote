@@ -3,13 +3,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/*
+/**
  * ChildProcess - actual PowerShell execution
  */
 public class ChildProcess {
 
 	
-	/*
+	/**
 	 * Send command to PowerShell
 	 * @param: command to be executed
 	 */

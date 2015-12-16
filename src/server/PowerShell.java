@@ -25,6 +25,7 @@ public class PowerShell {
 	 * @return stdOut or just a dummy
 	 */
 	public String command(String commandType, String commandActual, boolean custom){
+		
 		//Is this a custom command? else get from default values
 		String commandSingle = custom ? commandType : defaultC.commands.get(commandType).get(commandActual);
 		String stdout;

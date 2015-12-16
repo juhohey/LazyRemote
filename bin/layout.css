@@ -1,13 +1,112 @@
-.root{
-	font-family: sans-serif;
-	font-size: 16px;
-/*	-fx-background-color:#eee;*/
+#root{
+	-fx-font-size: 16px;
+	-fx-background-color: #f8f8f8;
+}
+.header-container{
+/*	-fx-background-insets: 100;
+	-fx-background-radius: 10;
+	-fx-background-color:purple;
+	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+	*/
+	-fx-border-insets:0 0 1 0;
+ 	-fx-border-color:#2D3E50,#2D3E50;
+ 	-fx-padding: 0;
+}
+.shadow{
+	-fx-background-color: #2D3E50;
+	-fx-border-insets:0 0 8 0;
+ 	-fx-border-color:#2D3E50,#2D3E50;
+ 	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 10, -1, 0, 7); 
+	-fx-padding: 0;
+	-fx-background-inset:0;
+}
+.header{
+	-fx-background-color:#2D3E50;
+	-fx-font-size:20px;
+}
+.logo-img{
+	padding: 0;
+}
+.button{
+	-fx-font-size:20px;
+	-fx-border:0;
+	-fx-background-color:transparent;
+	/*reset */
+	-fx-padding: 16px,0px,0px,0px;
+	-fx-indent:0px;
+	-fx-cursor:hand;
+	-fx-text-fill: white;
+
+	/*Margin */
+	-fx-border-insets: 8 0 8 0;
+ 	-fx-border-color: transparent, transparent;
 }
 
-#main{
-/*	-fx-background-color: azure;*/
-	-fx-spacing:40;
+.button-primary{
+	-fx-text-fill: #E64C66;
+	-fx-padding: 0;
+
+	/*Margin */
+ 	-fx-border-insets: 16 0 0 0;
+ 	-fx-border-color: transparent, transparent;
 }
-#top{
-	/*-fx-background-color: #eee;*/
+.button-clear{
+	-fx-text-fill: #2D3E50;
+	-fx-padding: 0;
+	-fx-border-insets: 8 12 0 0;
+	-fx-font-size:16px;
+}
+
+.cb{
+	-fx-cursor: hand;
+	-fx-border:0;
+	-fx-background-color:transparent;
+	-fx-background-color:  white;
+	/*Margin */
+	-fx-border-insets: 0 0 8 0;
+ 	-fx-border-color: transparent, transparent;
+}
+
+.logo{
+	-fx-fill: white;
+
+	/*Margin */
+	-fx-border-insets: 16 0 7 28;
+ 	-fx-border-color: transparent, transparent;
+}
+.body{
+	-fx-fill: white;
+	-fx-background-color:  #f8f8f8;
+	-fx-font-size:16px;
+	-fx-padding: 28px,0px,0px,0px;
+/*	-fx-pref-width: 1000px; 
+	-fx-max-width:1000px;
+	-fx-min-width:1000px;*/
+
+
+}
+
+.config-label{
+	-fx-font-size:16px;
+}
+
+.start-stop{
+	-fx-padding:0;
+}
+
+.host{
+   -fx-font-size:24px;
+   -fx-border-color: transparent, transparent;
+    -fx-border-insets: 0 0 8 0;
+}   
+.host-text{
+	-fx-fill: #444;
+}
+.green-text{
+	-fx-fill: #1BBC9B;
+	-fx-fill-text: #1BBC9B;
+}
+.red-text{
+	-fx-fill: #E64C66;
+	-fx-fill-text: #E64C66;
 }

@@ -1,5 +1,7 @@
 package view;
 
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -7,7 +9,7 @@ import javafx.stage.Stage;
 
 public class ViewWindow extends Application {
 	
-	private Model model;
+	//private static Model model;
 	
 	private final ViewHeader header = new ViewHeader(this);
 	private final ViewBody body = new ViewBody(this);
@@ -16,13 +18,17 @@ public class ViewWindow extends Application {
 	private Scene configScene;
 	private Scene homeScene;
 
+	/**CSS**/
+	private File css = new File("layout.css");
+	private String cssFile = "file:///" + css.getAbsolutePath().replace("\\", "/");
+	
 	public void build(Model model){
-		this.model = model;
-		System.out.println("ref of model saved" + this.model);
+		//ViewWindow.model = model;
+		//System.out.println("ref of model saved" + this.model);
 		//body = new ViewBody();
 	}
 
-
+	
 	@Override
 	public void start(Stage stageArg) throws Exception {
 		primaryStage = stageArg;
@@ -34,10 +40,27 @@ public class ViewWindow extends Application {
 		//build home
 		homeScene = buildHome();
 		
-		primaryStage.setScene(configScene);
+		//add style
+		//configScene.getStylesheets().add("layout.css");
+		
+		//configScene.getStylesheets().clear();
+		//configScene.getStylesheets().add();
+		
+		//homeScene.getStylesheets().clear();
+		//homeScene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
+		
+		//com.sun.javafx.css.StyleManager.getInstance().reloadStylesheets(configScene);
+		primaryStage.setScene(homeScene);
+		//primaryStage.setResizable(false);
+		//primaryStage.centerOnScreen(); 
+		primaryStage.setTitle("LazyRemote");
 		primaryStage.show();
 	}
-	
+	@Override
+	public void stop(){
+	    System.out.println("Stage is closing");
+	    Model.stopServer();
+	}
 	
 	
 	/*
@@ -48,14 +71,14 @@ public class ViewWindow extends Application {
 		GridPane grid = new GridPane();	
 		
 		//Add header
-		
 		grid = header.build(grid);
 		
 		//Add body
 		grid = body.buildHome(grid);
 		
+		grid.setId("root");
 		//build scene
-		Scene scene = new Scene(grid, 300, 250);
+		Scene scene = new Scene(grid, 640, 420);
 		//add style
 		scene.getStylesheets().add("layout.css");
 		
@@ -76,7 +99,8 @@ public class ViewWindow extends Application {
 		grid = body.buildConfig(grid);
 		
 		//build scene
-		Scene scene = new Scene(grid, 300, 250);
+		Scene scene = new Scene(grid, 640, 420);
+		
 		//add style
 		scene.getStylesheets().add("layout.css");
 		
@@ -87,8 +111,7 @@ public class ViewWindow extends Application {
 	/*
 	 * Render function
 	 */
-	public void render(String config){
-		body.setConfigs(config);
+	public void render(){
 		launch(); //DEFAULT JAVAFX METHOD
 	}
 	
@@ -104,10 +127,14 @@ public class ViewWindow extends Application {
 	public Scene getHome(){
 		return buildHome();
 	}
-	public void saveConfig(String configStrings) {
-		System.out.println(this.model);
+	/*
+	 * Save config from user input
+	 * @param string with values:separated;
+	 */
+	public static void saveConfig(String configStrings) {
+		//System.out.println(this.model);
 		try{
-			this.model.saveConfig("configStrings");
+			Model.saveConfig(configStrings);
 		}
 		catch(NullPointerException wat){
 			wat.printStackTrace();
@@ -115,20 +142,6 @@ public class ViewWindow extends Application {
 		}
 		
 	}
-//	public void switchScene(boolean showHome){
-//	if(showHome){
-//		
-//		//getPrimaryStage().setScene(homeScene);
-//	}
-//	else if(showHome){
-//		
-//		//getPrimaryStage().setScene(configScene);
-//	}
-//	 //getPrimaryStage().show();
-//	System.out.println("Showing scene"+configScene );
-//	
-//}
-
 
 
 	

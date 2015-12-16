@@ -1,5 +1,6 @@
 package view;
 
+import server.Http.ServerStatus;
 import server.Server;
 
 /*
@@ -8,19 +9,18 @@ import server.Server;
  */
 public class Model {
 
-	private ViewWindow viewWindow;
+	//private ViewWindow viewWindow;
 	private String userConfig;
-	private Server server;
+	private static Server server;
 	
 	/*
 	 * Need to pass a Sever instance to invoke this
 	 * @param Server - an instance of a server (single!)
 	 */
 	public Model(Server serverArg){
-		viewWindow = new ViewWindow();
-		viewWindow.build(this);
+		//viewWindow = new ViewWindow();
 		server = serverArg;
-		this.userConfig = server.getUserConfig();
+	//	this.userConfig = server.getUserConfig();		
 	}
 	
 	
@@ -29,14 +29,41 @@ public class Model {
 	 * Invoke the view
 	 */
 	public void renderView(){
-		viewWindow.render(userConfig);
+		//viewWindow.render(userConfig);
 	}
 	
 	/*
 	 * Save new configs
 	 */
-	public void saveConfig(String config){
+	public static void saveConfig(String config){
 		System.out.println("Saving config: "+ config);
 		server.setUserConfig(config);
 	}
+
+
+
+	public static ServerStatus getServerStatus() {
+		return server.getStatus();
+	}
+	public static String getIp() {
+		return server.getIp();
+	}
+
+
+
+	public static void stopServer() {
+		server.stop();
+	}
+
+	public static void startServer() {
+		server.startUI();
+		
+	}
+
+
+//
+//	public void passReference() {
+//		viewWindow.build(this);
+//		
+//	}
 }

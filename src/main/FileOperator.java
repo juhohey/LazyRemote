@@ -1,6 +1,7 @@
 package main;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,15 +20,17 @@ public class FileOperator {
 	    while (line != null) {
 	    	builder.append(line);
 	    	builder.append(System.lineSeparator());
-	        line = reader.readLine();
+	    	line =reader.readLine();
 	    }
 	    reader.close();
-	    return line;
+	    return builder.toString();
 		   
 	}
 	
 
 	public void writeFile(String fileName, String data) throws IOException, FileNotFoundException{
+		File dir = new File("lazyfiles");
+		dir.mkdirs();
 		BufferedWriter bf = new BufferedWriter(new FileWriter(fileName));
 		bf.write(data);
 		bf.close();

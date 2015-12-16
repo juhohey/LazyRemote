@@ -1,6 +1,9 @@
 package server;
 
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+import java.util.HashMap;
 
 import com.sun.net.httpserver.HttpServer;
 
@@ -8,40 +11,52 @@ import com.sun.net.httpserver.HttpServer;
 public class Http {
 
 	private HttpServer httpServer;
-	private boolean serverRunning;
-	public Http(){
-		
+	public enum ServerStatus{
+		ONLINE, OFFLINE, NO_SECRET, PORT_IN_USE
 	}
+	
+	ServerStatus serverStatusMessage = ServerStatus.OFFLINE;
 
-	/*
+	/**
 	 * Create server
 	 * @param: port - port to listen to
 	 */
-	public void create(int port) throws Exception{
-			httpServer = HttpServer.create(new InetSocketAddress(port), 0);
+	public void create(int port, String ip) throws Exception{
+				
+			httpServer = HttpServer.create(new InetSocketAddress("192.168.100.22",port), 0);
 			httpServer.setExecutor(null); // creates a default executor
 			httpServer.start();
-			serverRunning = true;
+			serverStatusMessage = ServerStatus.ONLINE;
 	}
-	/*
+	
+	/**
 	 * Register routes for server
 	 * @param: Routes, list of routes to register
+	 * 		0 / = help
+	 * 		1 /connect = get token
+	 * 		2 /command = send command
 	 */
-	private void registerRoutes(String[] routes){
-		for (String route : routes) {
-			RequestHandler handle = new RequestHandler(route);
-			httpServer.createContext(route, handle);
+	private void registerRoutes(String[] routes){ 
+		for (int i = 0; i < routes.length; i++) {
+			//System.out.println(routes[i]);
+			RequestHandler handle = new RequestHandler(routes[i]);
+			httpServer.createContext(routes[i], handle);
 		}
 	}
-	/*
+	
+	/**
 	 * Lift the actual server
-	 * @param: port, port to listen to
+	 * @param: Settings hashmap
 	 * @param: Routes, list of routes to register
 	 */
-	public void lift(int port, String[] routes) throws Exception{
-		if(serverRunning) httpServer.stop(port);
-		this.create(port);
+	public void lift(HashMap<String, String> settings, String[] routes) throws Exception{
+		if(serverStatusMessage == ServerStatus.ONLINE) stop();
+		this.create(Integer.parseInt(settings.get("port")),settings.get("ip"));
 		this.registerRoutes(routes);
+	}
+	public void stop() {
+		 httpServer.stop(1);
+		
 	}
 }
 

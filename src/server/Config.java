@@ -1,39 +1,58 @@
 package server;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 
 import main.FileOperator;
-/*
+/**
  * String holder
  * Save these to a file later perhaps
  */
 public class Config {
 
+	//Singleton instance
+	final static Config configInstance = new Config();
+	
 	private FileOperator file;
+	
+	//Server settings 
 	private String ip; 
 	private String host;
-	private String[] routes = { "/connect",  "/"};
-	private int port = 8001;
+	private String[] routes = {"/command", "/connection",  "/"};
+	private int port = 8081;
 	
-	private String[] files = {"config","devices"};
-	private String userConfig;
+	//file names 
+	private String[] files = {"lazyfiles/config","devices"};
+	private static String userConfig;
+		
+	//singleton 
+	private Config(){
+		
+	}
+	//singleton 
+	public static Config getInstance(){
+		return configInstance;
+		
+	}
 	
-	
-	public Config(){
-		//Init
+	//Init
+	public void init(){
+		//file instance
 		file = new FileOperator();
+		
+		//Read config
 		try {
 			userConfig = file.readFile(files[0]);
+			System.out.println("Config 32 read: " + userConfig);
 		} catch (IOException e) {
 			userConfig = null;
-			
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
 	}
-	
-	
+
 	//setters
 	public void setIp(String ip) {
 		this.ip = ip;		
