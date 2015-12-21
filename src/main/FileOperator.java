@@ -29,7 +29,7 @@ public class FileOperator {
 	
 
 	public void writeFile(String fileName, String data) throws IOException, FileNotFoundException{
-		File dir = new File("lazyfiles");
+		File dir = new File(System.getenv("APPDATA")+"/LazyRemote");
 		dir.mkdirs();
 		BufferedWriter bf = new BufferedWriter(new FileWriter(fileName));
 		bf.write(data);

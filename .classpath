@@ -6,6 +6,7 @@
 			<accessrule kind="accessible" pattern="com/sun/net/httpserver/"/>
 		</accessrules>
 	</classpathentry>
-	<classpathentry kind="lib" path="Z:/Programs/Java/jre/lib/jfxrt.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="src/jfxrt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

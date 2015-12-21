@@ -23,7 +23,7 @@ public class Http {
 	 */
 	public void create(int port, String ip) throws Exception{
 				
-			httpServer = HttpServer.create(new InetSocketAddress("192.168.100.22",port), 0);
+			httpServer = HttpServer.create(new InetSocketAddress(ip,port), 0);
 			httpServer.setExecutor(null); // creates a default executor
 			httpServer.start();
 			serverStatusMessage = ServerStatus.ONLINE;
@@ -55,7 +55,7 @@ public class Http {
 		this.registerRoutes(routes);
 	}
 	public void stop() {
-		 httpServer.stop(1);
+		if(httpServer!=null) httpServer.stop(1);
 		
 	}
 }

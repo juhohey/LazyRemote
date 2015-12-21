@@ -24,7 +24,8 @@ public class Config {
 	private int port = 8081;
 	
 	//file names 
-	private String[] files = {"lazyfiles/config","devices"};
+	String value = System.getenv("APPDATA");
+	private String[] files = {value+"/LazyRemote/config","devices"};
 	private static String userConfig;
 		
 	//singleton 

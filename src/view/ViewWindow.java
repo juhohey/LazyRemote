@@ -12,7 +12,7 @@ public class ViewWindow extends Application {
 	//private static Model model;
 	
 	private final ViewHeader header = new ViewHeader(this);
-	private final ViewBody body = new ViewBody(this);
+	private ViewBody body;
 	
 	private Stage primaryStage;
 	private Scene configScene;
@@ -74,6 +74,7 @@ public class ViewWindow extends Application {
 		grid = header.build(grid);
 		
 		//Add body
+		body = new ViewBody(this);
 		grid = body.buildHome(grid);
 		
 		grid.setId("root");
@@ -96,6 +97,7 @@ public class ViewWindow extends Application {
 		grid = header.build(grid);
 		
 		//Add body
+		body = new ViewBody(this);
 		grid = body.buildConfig(grid);
 		
 		//build scene
